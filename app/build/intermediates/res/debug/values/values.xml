@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/Users/knowroaming/Documents/Mat%20Dev/Android/pocketsphinx-android-demo-5prealpha-android-studio/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/Mat/Documents/Documents/Matty's%20stuff/Programming/Android/PocketSpeech/pocketSpeech/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="app_name">PocketSphinx Demo</string>
     <string name="digits_caption">Let\'s recognize some digits: say something like \"one two three four five\".</string>

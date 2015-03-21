@@ -54,9 +54,9 @@ public class PocketSphinxActivity extends Activity implements
     private static final String TAG = "MyActivity";
 
     private static final String KWS_SEARCH = "wakeup";
-    private static final String KWS_STOP = "stop";
+    private static final String KWS_STOP = "sleep";
     private static final String FORECAST_SEARCH = "forecast";
-    private static final String STOP_SEARCH = "stop";
+    private static final String STOPPHRASE = "stop";
     private static final String DIGITS_SEARCH = "presentation";
     private static final String MENU_SEARCH = "menu";
     private static final String KEYPHRASE = "start";
@@ -117,13 +117,19 @@ public class PocketSphinxActivity extends Activity implements
             switchSearch(MENU_SEARCH);
 //        else if (text.equals(DIGITS_SEARCH))
 //            switchSearch(DIGITS_SEARCH);
-        else if (text.equals(STOP_SEARCH))
+        else if (text.equals(STOPPHRASE)) {
             makeText(getApplicationContext(), "STOPPPP Pls", Toast.LENGTH_SHORT).show();
+            endPresentation();
+        }
         else {
             switchSearch(DIGITS_SEARCH);
             ((TextView) findViewById(R.id.result_text)).setText(text);
         }
 
+    }
+
+    public void endPresentation() {
+        switchSearch(KWS_SEARCH);
     }
 
     @Override
@@ -157,7 +163,7 @@ public class PocketSphinxActivity extends Activity implements
         Log.d(TAG, "onEndofSpeech");
         if (DIGITS_SEARCH.equals(recognizer.getSearchName()))
 //                || FORECAST_SEARCH.equals(recognizer.getSearchName()))
-            switchSearch(KWS_SEARCH);
+            switchSearch(DIGITS_SEARCH);
     }
 
     private void switchSearch(String searchName) {
@@ -179,7 +185,7 @@ public class PocketSphinxActivity extends Activity implements
 
         // Create keyword-activation search.
         recognizer.addKeyphraseSearch(KWS_SEARCH, KEYPHRASE);
-        recognizer.addKeyphraseSearch(KWS_STOP, STOP_SEARCH);
+        recognizer.addKeyphraseSearch(KWS_STOP, STOPPHRASE);
         // Create grammar-based searches.
         File menuGrammar = new File(modelsDir, "grammar/menu.gram");
         recognizer.addGrammarSearch(MENU_SEARCH, menuGrammar);
